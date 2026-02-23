@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Black Root — Propuesta Comercial</title>
+  <title>Black Root — Propuestas Comerciales</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
@@ -28,468 +28,90 @@
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
-    html { font-size:16px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
-    body { background:var(--charcoal); color:var(--ivory); font-family:var(--font-body); font-size:1rem; line-height:1.5; overflow-x:hidden; max-width:100vw; }
-    ::selection { background:var(--accent); color:var(--black); }
+    html { font-size:16px; -webkit-font-smoothing:antialiased; scroll-behavior:smooth; }
+    body { background:var(--black); color:var(--ivory); font-family:var(--font-body); overflow-x:hidden; min-height:100svh; display:flex; flex-direction:column; }
 
-    /* NOISE OVERLAY */
-    .section { position:relative; overflow:hidden; }
-    .section::after { content:''; position:absolute; inset:0; opacity:0.02; pointer-events:none; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-    .section__inner { position:relative; z-index:1; max-width:1100px; margin:0 auto; width:100%; }
+    .gateway { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px var(--pad); position:relative; text-align:center; }
+    
+    /* NOISE */
+    .gateway::after { content:''; position:absolute; inset:0; opacity:0.03; pointer-events:none; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
-    .divider { height:1px; background:linear-gradient(to right,transparent,var(--ash),transparent); }
+    .gateway__header { position:relative; z-index:2; margin-bottom:60px; animation:fadeDown 1.2s var(--ease-out); display:flex; flex-direction:column; align-items:center; }
+    .gateway__brand-box { display:inline-flex; flex-direction:column; align-items:center; width:max-content; }
+    .gateway__logo { width:100%; max-width:200px; height:auto; margin-bottom:12px; opacity:0.9; }
+    .gateway__tag { font-family:var(--font-body); font-size:1.1rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--accent); font-weight:600; white-space:nowrap; margin-right:-0.25em; }
 
-    /* ── COVER ── */
-    .cover { background:var(--black); min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px var(--pad); position:relative; }
-    .cover__corners { position:absolute; inset:16px; pointer-events:none; }
-    .cover__corners::before, .cover__corners::after,
-    .cover__corners span::before, .cover__corners span::after {
-      content:''; position:absolute; width:18px; height:18px; opacity:0.2;
+    .gateway__options { position:relative; z-index:2; display:grid; grid-template-columns:1fr; gap:20px; width:100%; max-width:800px; animation:fadeUp 1.2s var(--ease-out) 0.3s both; }
+
+    .option-card { 
+      text-decoration:none; 
+      background:rgba(255,255,255,0.03); 
+      border:1px solid rgba(255,255,255,0.08); 
+      padding:40px 30px; 
+      display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      transition:all 0.5s var(--ease);
+      position:relative;
+      overflow:hidden;
     }
-    .cover__corners::before { top:0; left:0; border-top:1px solid var(--cream); border-left:1px solid var(--cream); }
-    .cover__corners::after { top:0; right:0; border-top:1px solid var(--cream); border-right:1px solid var(--cream); }
-    .cover__corners span::before { bottom:0; left:0; border-bottom:1px solid var(--cream); border-left:1px solid var(--cream); }
-    .cover__corners span::after { bottom:0; right:0; border-bottom:1px solid var(--cream); border-right:1px solid var(--cream); }
+    .option-card:hover { background:rgba(255,255,255,0.06); border-color:var(--accent); transform:translateY(-5px); }
+    
+    .option-card__tag { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--stone); margin-bottom:12px; }
+    .option-card__title { font-family:var(--font-serif); font-size:1.8rem; font-weight:400; color:var(--ivory); margin-bottom:8px; transition:color 0.3s var(--ease); }
+    .option-card:hover .option-card__title { color:var(--accent); }
+    .option-card__desc { font-size:1rem; color:var(--sand); max-width:280px; line-height:1.4; }
+    
+    .option-card__arrow { margin-top:20px; color:var(--accent); font-size:1.2rem; transition:transform 0.3s var(--ease); }
+    .option-card:hover .option-card__arrow { transform:translateX(8px); }
 
-    .cover__logo { width:130px; height:auto; opacity:0.9; margin-bottom:20px; opacity:0; animation:fadeDown 1s var(--ease-out) 0.1s forwards; }
-    .cover__tag { font-family:var(--font-body); font-size:0.95rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--sand); margin-bottom:16px; opacity:0; animation:fadeDown 1s var(--ease-out) 0.3s forwards; }
-    .cover__title { font-family:var(--font-display); font-size:2.6rem; font-weight:normal; letter-spacing:0.02em; line-height:1.05; color:var(--ivory); margin-bottom:8px; opacity:0; animation:fadeUp 1.2s var(--ease-out) 0.5s forwards; }
-    .cover__title em { font-family:var(--font-serif); font-style:italic; font-weight:400; color:var(--cream); }
-    .cover__line { width:36px; height:1px; background:linear-gradient(to right,transparent,var(--accent),transparent); margin:12px auto; opacity:0; animation:expandLine 0.8s var(--ease) 0.9s forwards; }
-    .cover__subtitle { font-family:var(--font-serif); font-size:1.2rem; font-weight:400; font-style:italic; color:var(--sand); max-width:340px; line-height:1.4; margin-bottom:28px; opacity:0; animation:fadeUp 1s var(--ease-out) 1.1s forwards; }
-    .cover__features { display:flex; flex-direction:column; align-items:flex-start; gap:10px; text-align:left; opacity:0; animation:fadeUp 1s var(--ease-out) 1.4s forwards; }
-    .cover__feature { display:flex; align-items:flex-start; gap:10px; font-family:var(--font-body); font-size:1.05rem; font-weight:400; color:var(--cream); line-height:1.45; }
-    .cover__feature-dot { width:6px; height:6px; border:1px solid var(--accent); border-radius:50%; flex-shrink:0; margin-top:8px; }
-    .cover__feature strong { color:var(--ivory); font-weight:600; }
-    .cover__scroll { position:absolute; bottom:20px; left:0; right:0; text-align:center; opacity:0; animation:fadeUp 0.8s var(--ease-out) 1.8s forwards; }
-    .cover__scroll p { font-family:var(--font-body); font-size:0.875rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--stone); }
-    .cover__scroll p::after { content:''; display:block; width:1px; height:16px; background:linear-gradient(to bottom,var(--stone),transparent); margin:4px auto 0; }
+    .gateway__footer { position:relative; z-index:2; margin-top:auto; padding:40px var(--pad); text-align:center; opacity:0.5; font-size:0.875rem; letter-spacing:0.1em; color:var(--stone); }
 
-    /* ── SECTION SHARED ── */
-    .s-label { font-family:var(--font-body); font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; display:flex; align-items:center; gap:8px; font-weight:500; }
-    .s-label::before { content:''; width:16px; height:1px; background:var(--accent); }
-    .s-label--center { justify-content:center; }
-    .s-label--center::before { display:none; }
-    .s-title { font-family:var(--font-serif); font-size:2rem; font-weight:400; line-height:1.15; color:var(--ivory); margin-bottom:8px; }
-    .s-title em { font-style:italic; font-weight:400; color:var(--cream); }
-    .s-desc { font-family:var(--font-body); font-size:1.05rem; font-weight:400; line-height:1.5; color:var(--sand); }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 
-    /* ── PROFILE ── */
-    .profile { background:var(--slate); padding:36px var(--pad); }
-    .profile__header { margin-bottom:24px; }
-    .profile__list { list-style:none; }
-    .profile__item { padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:flex-start; gap:12px; font-family:var(--font-body); font-size:1.1rem; font-weight:400; color:var(--cream); line-height:1.45; }
-    .profile__item:first-child { border-top:1px solid rgba(255,255,255,0.08); }
-    .profile__num { font-family:var(--font-serif); font-size:1.1rem; font-weight:500; color:var(--accent); min-width:28px; flex-shrink:0; }
-
-    /* ── DISTINCTION ── */
-    .distinction { background:var(--charcoal); padding:36px var(--pad); }
-    .distinction__header { text-align:center; margin-bottom:20px; }
-    .distinction__grid { display:flex; flex-direction:column; gap:12px; }
-    .distinction__card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); padding:20px 18px; position:relative; transition:all 0.5s var(--ease); }
-    .distinction__card:hover { background:rgba(255,255,255,0.05); border-color:rgba(196,163,90,0.18); }
-    .distinction__card-num { font-family:var(--font-serif); font-size:2.2rem; font-weight:300; color:rgba(196,163,90,0.12); position:absolute; top:8px; right:14px; line-height:1; }
-    .distinction__card-title { font-family:var(--font-serif); font-size:1.35rem; font-weight:500; color:var(--ivory); margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.08); }
-    .distinction__card-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
-    .distinction__card-item { font-family:var(--font-body); font-size:1.05rem; font-weight:400; color:var(--cream); line-height:1.45; display:flex; align-items:flex-start; gap:8px; }
-    .distinction__card-item::before { content:''; width:6px; height:6px; background:var(--accent); border-radius:50%; flex-shrink:0; margin-top:8px; }
-
-    /* ── CONNECTION ── */
-    .connection { background:var(--black); padding:28px var(--pad); position:relative; }
-    .connection::before, .connection::after { content:''; position:absolute; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--accent),transparent); opacity:0.3; }
-    .connection::before { top:0; }
-    .connection::after { bottom:0; }
-    .connection__title { font-family:var(--font-body); font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); text-align:center; margin-bottom:16px; font-weight:500; }
-    .connection__flow { display:flex; flex-direction:column; align-items:center; gap:0; }
-    .connection__item { width:100%; font-family:var(--font-body); font-size:1.1rem; font-weight:500; color:var(--cream); padding:12px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); text-align:center; }
-    .connection__reason { font-size:1rem; font-weight:400; color:var(--sand); display:block; margin-top:3px; }
-    .connection__arrow { font-size:1rem; color:var(--accent); opacity:0.7; padding:4px 0; }
-    .connection__arrow--down { display:block; }
-    .connection__arrow--right { display:none; }
-
-    /* ── PRODUCTS ── */
-    .products { background:var(--slate); padding:36px var(--pad); }
-    .products__header { text-align:center; margin-bottom:24px; }
-    .products__sub { font-family:var(--font-serif); font-size:1.15rem; font-weight:400; font-style:italic; color:var(--sand); }
-    .products__grid { display:flex; flex-direction:column; gap:16px; }
-
-    .p-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); overflow:hidden; transition:all 0.5s var(--ease); }
-    .p-card:hover { background:rgba(255,255,255,0.05); border-color:rgba(196,163,90,0.15); }
-    .p-card__img { width:100%; overflow:hidden; background:rgba(255,255,255,0.04); }
-    .p-card__img img { width:100%; height:auto; display:block; filter:brightness(0.95) contrast(1.02); transition:transform 0.5s var(--ease),filter 0.5s var(--ease); }
-    .p-card:hover .p-card__img img { transform:scale(1.03); filter:brightness(1) contrast(1.02); }
-    .p-card__body { padding:16px 18px; }
-    .p-card__name { font-family:var(--font-display); font-size:1.3rem; font-weight:normal; letter-spacing:0.04em; color:var(--ivory); margin-bottom:4px; }
-    .p-card__desc { font-family:var(--font-body); font-size:1.05rem; font-weight:400; color:var(--sand); line-height:1.45; margin-bottom:14px; }
-    .p-card__prices { display:flex; gap:0; border-top:1px solid rgba(255,255,255,0.08); }
-    .p-card__price { flex:1; text-align:center; padding:14px 8px; }
-    .p-card__price + .p-card__price { border-left:1px solid rgba(255,255,255,0.08); }
-    .p-card__price-label { font-family:var(--font-body); font-size:0.875rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--stone); margin-bottom:3px; }
-    .p-card__price-value { font-family:var(--font-serif); font-size:1.35rem; font-weight:500; color:var(--ivory); }
-    .p-card__price--result .p-card__price-value { color:var(--accent); font-weight:600; }
-    .p-card__price--suggested .p-card__price-value { color:var(--cream); font-weight:400; }
-
-    /* ── CONDITIONS ── */
-    .conditions { background:var(--graphite); padding:36px var(--pad); }
-    .conditions__header { margin-bottom:20px; }
-    .conditions__list { list-style:none; }
-    .conditions__item { padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; gap:12px; align-items:flex-start; }
-    .conditions__item:first-child { border-top:1px solid rgba(255,255,255,0.05); }
-    .conditions__icon { width:24px; height:24px; border:1px solid rgba(196,163,90,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
-    .conditions__icon-dot { width:4px; height:4px; background:var(--accent); opacity:0.5; }
-    .conditions__text { font-family:var(--font-body); font-size:1.05rem; font-weight:400; color:var(--cream); line-height:1.5; }
-    .conditions__text strong { font-weight:600; color:var(--ivory); }
-
-    /* ── CLOSING ── */
-    .closing { background:var(--black); padding:48px var(--pad); text-align:center; position:relative; }
-    .closing::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:1px; height:24px; background:linear-gradient(to bottom,var(--accent),transparent); opacity:0.25; }
-    .closing__logo { width:100px; height:auto; opacity:0.7; margin:0 auto 10px; display:block; }
-    .closing__brand { font-family:var(--font-display); font-size:2rem; font-weight:normal; letter-spacing:0.06em; color:var(--ivory); margin-bottom:4px; }
-    .closing__tagline { font-family:var(--font-serif); font-size:1.2rem; font-weight:400; font-style:italic; color:var(--sand); margin-bottom:14px; }
-    .closing__line { width:28px; height:1px; background:var(--accent); opacity:0.5; margin:0 auto 10px; }
-    .closing__contact { font-family:var(--font-body); font-size:1.05rem; font-weight:400; letter-spacing:0.1em; color:var(--stone); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes expandLine { from { transform:scaleX(0); opacity:0; } to { transform:scaleX(1); opacity:1; } }
-    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.7s var(--ease-out),transform 0.7s var(--ease-out); }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-d1 { transition-delay:0.08s; } .reveal-d2 { transition-delay:0.16s; }
-    .reveal-d3 { transition-delay:0.24s; } .reveal-d4 { transition-delay:0.32s; }
-    .reveal-d5 { transition-delay:0.4s; }
-
-    /* ═══════════════════════════════════
-       TABLET  (≥ 600px)
-       ═══════════════════════════════════ */
-    @media (min-width:600px) {
-      :root { --pad:36px; }
-
-      .cover__title { font-size:3.2rem; }
-      .cover__subtitle { font-size:1.3rem; max-width:420px; }
-      .cover__logo { width:150px; }
-
-      .s-title { font-size:2.2rem; }
-
-      .products__grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-      .distinction__grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    }
-
-    /* ═══════════════════════════════════
-       DESKTOP  (≥ 960px)
-       ═══════════════════════════════════ */
-    @media (min-width:960px) {
-      :root { --pad:40px; }
-
-      body { font-size:1.15rem; }
-
-      .cover { padding:36px 32px; }
-      .cover__logo { width:200px; }
-      .cover__tag { font-size:1.1rem; letter-spacing:0.3em; }
-      .cover__title { font-size:clamp(3.2rem,5.5vw,5rem); }
-      .cover__subtitle { font-size:1.5rem; max-width:560px; }
-      .cover__features { gap:8px; }
-      .cover__feature { font-size:1.15rem; }
-      .cover__corners { inset:24px; }
-      .cover__corners::before, .cover__corners::after,
-      .cover__corners span::before, .cover__corners span::after { width:22px; height:22px; }
-
-      .s-label { font-size:1.1rem; letter-spacing:0.28em; }
-      .s-label::before { width:20px; }
-      .s-title { font-size:clamp(2.2rem,3.5vw,3rem); }
-      .s-desc { font-size:1.15rem; max-width:480px; }
-
-      /* Profile: 2 columns */
-      .profile { padding:40px var(--pad); }
-      .profile .section__inner { display:grid; grid-template-columns:1fr 1.2fr; gap:36px; align-items:center; }
-      .profile__item { font-size:1.15rem; gap:14px; }
-      .profile__num { font-size:1.15rem; min-width:30px; }
-
-      /* Distinction: 3 columns */
-      .distinction { padding:40px var(--pad); }
-      .distinction__grid { grid-template-columns:repeat(3,1fr); gap:16px; }
-      .distinction__card-num { font-size:2.8rem; }
-      .distinction__card-title { font-size:1.4rem; }
-      .distinction__card-item { font-size:1.05rem; }
-
-      /* Connection: horizontal */
-      .connection { padding:28px var(--pad); }
-      .connection__title { font-size:1.1rem; letter-spacing:0.3em; }
-      .connection__flow { flex-direction:row; align-items:center; justify-content:center; flex-wrap:nowrap; max-width:100%; }
-      .connection__item { width:auto; font-size:0.95rem; padding:8px 14px; white-space:nowrap; }
-      .connection__reason { font-size:0.8rem; margin-top:2px; }
-      .connection__arrow--down { display:none; }
-      .connection__arrow--right { display:inline; padding:0 4px; }
-
-      /* Products: horizontal cards */
-      .products { padding:40px var(--pad); }
-      .products__sub { font-size:1.25rem; }
-      .products__grid { display:flex; flex-direction:column; gap:4px; }
-      .p-card { display:grid; grid-template-columns:150px 1fr auto; min-height:150px; }
-      .p-card__img { height:100%; }
-      .p-card__img img { width:100%; height:100%; object-fit:cover; object-position:center top; }
-      .p-card__body { padding:22px 26px; display:flex; flex-direction:column; justify-content:center; margin-bottom:0; }
-      .p-card__name { font-size:1.4rem; }
-      .p-card__desc { font-size:1.1rem; margin-bottom:0; max-width:480px; }
-      .p-card__prices { flex-direction:row; border-top:none; border-left:1px solid rgba(255,255,255,0.05); background:rgba(0,0,0,0.12); min-width:420px; align-items:center; gap:22px; padding:22px 28px; }
-      .p-card__price { flex:none; text-align:center; min-width:95px; padding:0; }
-      .p-card__price + .p-card__price { border-left:none; }
-      .p-card__price--result { padding-left:18px; border-left:1px solid rgba(255,255,255,0.07); }
-      .p-card__price-label { font-size:0.95rem; }
-      .p-card__price-value { font-size:1.5rem; }
-
-      /* Conditions: 2 columns */
-      .conditions { padding:40px var(--pad); }
-      .conditions .section__inner { display:grid; grid-template-columns:0.8fr 1fr; gap:36px; align-items:start; }
-      .conditions__text { font-size:1.15rem; }
-
-      /* Closing */
-      .closing { padding:40px var(--pad); }
-      .closing__logo { width:140px; margin-bottom:12px; }
-      .closing__brand { font-size:clamp(2rem,3vw,2.8rem); }
-      .closing__tagline { font-size:1.4rem; margin-bottom:16px; }
-      .closing__contact { font-size:1.15rem; letter-spacing:0.12em; }
-    }
-
-    /* ═══════════════════════════════════
-       WIDE DESKTOP  (≥ 1200px)
-       ═══════════════════════════════════ */
-    @media (min-width:1200px) {
-      .cover__title { font-size:clamp(3.5rem,5.5vw,5.5rem); }
-      .cover__subtitle { font-size:1.65rem; max-width:600px; }
-      .cover__feature { font-size:1.25rem; }
-      .p-card { grid-template-columns:160px 1fr auto; }
-    }
-
-    @media print {
-      body { background:#333; }
-      .cover__scroll { display:none; }
-      .reveal { opacity:1!important; transform:none!important; }
+    @media (min-width:768px) {
+      .gateway__options { grid-template-columns:1fr 1fr; gap:40px; max-width:1000px; }
+      .gateway__logo { max-width:480px; margin-bottom:18px; }
+      .gateway__tag { font-size:1.6rem; letter-spacing:0.42em; margin-right:-0.42em; }
+      .option-card { padding:80px 50px; border-width:1.5px; }
+      .option-card__tag { font-size:0.9rem; }
+      .option-card__title { font-size:2.4rem; }
+      .option-card__desc { font-size:1.15rem; max-width:340px; }
+      .option-card__arrow { font-size:1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- COVER -->
-  <section class="cover section">
-    <div class="cover__corners"><span></span></div>
-    <img src="assets/img/logo.png" alt="Black Root" class="cover__logo">
-    <p class="cover__tag">Propuesta Comercial &mdash; 2026</p>
-    <h1 class="cover__title">Convertimos básicos<br>en productos <em>con identidad</em></h1>
-    <div class="cover__line"></div>
-    <p class="cover__subtitle">Somos raíz en movimiento, creando con el Alma, respirando desde el Arte</p>
-    <div class="cover__features">
-      <div class="cover__feature"><div class="cover__feature-dot"></div><span><strong>Prendas básicas</strong> &rarr; fáciles de vender todo el año</span></div>
-      <div class="cover__feature"><div class="cover__feature-dot"></div><span><strong>Diseño de autor</strong> &rarr; no compite con otras marcas del perchero</span></div>
-      <div class="cover__feature"><div class="cover__feature-dot"></div><span><strong>Minimalismo</strong> &rarr; combina con todo, menos objeciones</span></div>
-      <div class="cover__feature"><div class="cover__feature-dot"></div><span><strong>Calidad premium</strong> &rarr; menos devoluciones, más satisfacción</span></div>
-      <div class="cover__feature"><div class="cover__feature-dot"></div><span><strong>Producto atemporal</strong> &rarr; no depende de temporadas</span></div>
+  <main class="gateway">
+    <header class="gateway__header">
+      <div class="gateway__brand-box">
+        <img src="assets/img/logo.png" alt="Black Root" class="gateway__logo">
+        <p class="gateway__tag">Propuesta Comercial</p>
+      </div>
+    </header>
+
+    <div class="gateway__options">
+      <a href="propuesta-locales.html" class="option-card">
+        <span class="option-card__tag">Puntos de Venta</span>
+        <h2 class="option-card__title">Locales & Revendedores</h2>
+        <p class="option-card__desc">Para tiendas físicas y multimarca que buscan incorporar diseño de autor.</p>
+        <span class="option-card__arrow">&rarr;</span>
+      </a>
+
+      <a href="representantes.html" class="option-card">
+        <span class="option-card__tag">Expansión</span>
+        <h2 class="option-card__title">Representantes Oficiales</h2>
+        <p class="option-card__desc">Para socios estratégicos interesados en el desarrollo de zona exclusiva.</p>
+        <span class="option-card__arrow">&rarr;</span>
+      </a>
     </div>
-    <div class="cover__scroll"><p>Descubrí más</p></div>
-  </section>
 
-  <!-- PROFILE -->
-  <section class="profile section">
-    <div class="section__inner">
-      <div class="profile__header reveal">
-        <div class="s-label">Perfil de cliente</div>
-        <h2 class="s-title">El perfil de cliente<br>que busca <em>Black Root</em></h2>
-        <p class="s-desc">Nuestro producto conecta con un consumidor específico que valora la calidad, el diseño y la autenticidad por encima de todo.</p>
-      </div>
-      <ul class="profile__list">
-        <li class="profile__item reveal reveal-d1"><span class="profile__num">01</span><span>Persona que valora vestirse simple pero con identidad</span></li>
-        <li class="profile__item reveal reveal-d2"><span class="profile__num">02</span><span>No compra por precio, compra por diseño y calidad</span></li>
-        <li class="profile__item reveal reveal-d3"><span class="profile__num">03</span><span>Busca prendas versátiles para uso diario</span></li>
-        <li class="profile__item reveal reveal-d4"><span class="profile__num">04</span><span>Valora marcas con concepto, no genéricas</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- DISTINCTION -->
-  <section class="distinction section">
-    <div class="section__inner">
-      <div class="distinction__header reveal">
-        <div class="s-label s-label--center">Diferencial</div>
-        <h2 class="s-title" style="text-align:center;">Por qué Black Root <em>se distingue</em></h2>
-      </div>
-      <div class="distinction__grid">
-        <div class="distinction__card reveal reveal-d1">
-          <div class="distinction__card-num">01</div>
-          <h3 class="distinction__card-title">Se distingue en el perchero</h3>
-          <ul class="distinction__card-list">
-            <li class="distinction__card-item">Ilustraciones exclusivas (no genéricas)</li>
-            <li class="distinction__card-item">Paleta sobria y sofisticada</li>
-            <li class="distinction__card-item">Identidad visual reconocible</li>
-            <li class="distinction__card-item">Prendas que llaman la atención sin ser estridentes</li>
-          </ul>
-        </div>
-        <div class="distinction__card reveal reveal-d2">
-          <div class="distinction__card-num">02</div>
-          <h3 class="distinction__card-title">Rota bien en un multimarca</h3>
-          <ul class="distinction__card-list">
-            <li class="distinction__card-item">Son básicos &rarr; no pasan de moda</li>
-            <li class="distinction__card-item">Tienen diseño &rarr; no compiten por precio</li>
-            <li class="distinction__card-item">Son combinables &rarr; el cliente decide rápido</li>
-            <li class="distinction__card-item">Son premium &rarr; justifican el valor</li>
-            <li class="distinction__card-item">Son diferentes &rarr; no parecen "otra remera más"</li>
-          </ul>
-        </div>
-        <div class="distinction__card reveal reveal-d3">
-          <div class="distinction__card-num">03</div>
-          <h3 class="distinction__card-title">Facilitamos tu trabajo</h3>
-          <ul class="distinction__card-list">
-            <li class="distinction__card-item">Reposición ágil</li>
-            <li class="distinction__card-item">Material para redes</li>
-            <li class="distinction__card-item">Comunicación directa</li>
-            <li class="distinction__card-item">Compra simple y clara</li>
-            <li class="distinction__card-item">Sin exigencias excesivas de stock</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONNECTION -->
-  <section class="connection section">
-    <div class="section__inner">
-      <p class="connection__title">Conectando todo</p>
-      <div class="connection__flow">
-        <div class="connection__item">Son básicos<span class="connection__reason">No pasan de moda</span></div>
-        <span class="connection__arrow connection__arrow--down">&darr;</span>
-        <span class="connection__arrow connection__arrow--right">&rarr;</span>
-        <div class="connection__item">Tienen diseño<span class="connection__reason">No compiten por precio</span></div>
-        <span class="connection__arrow connection__arrow--down">&darr;</span>
-        <span class="connection__arrow connection__arrow--right">&rarr;</span>
-        <div class="connection__item">Son combinables<span class="connection__reason">El cliente decide rápido</span></div>
-        <span class="connection__arrow connection__arrow--down">&darr;</span>
-        <span class="connection__arrow connection__arrow--right">&rarr;</span>
-        <div class="connection__item">Son premium<span class="connection__reason">Justifican el valor</span></div>
-        <span class="connection__arrow connection__arrow--down">&darr;</span>
-        <span class="connection__arrow connection__arrow--right">&rarr;</span>
-        <div class="connection__item">Son diferentes<span class="connection__reason">No parecen "otra remera más"</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTS -->
-  <section class="products section">
-    <div class="section__inner">
-      <div class="products__header reveal">
-        <div class="s-label s-label--center">Catálogo</div>
-        <h2 class="s-title" style="text-align:center;">Precios <em>Mayoristas</em></h2>
-        <p class="products__sub">Temporada 2026</p>
-      </div>
-      <div class="products__grid">
-
-        <div class="p-card reveal reveal-d1">
-          <div class="p-card__img"><img src="assets/img/premium_essential_tee.jpg" alt="Premium Essential Tee"></div>
-          <div class="p-card__body">
-            <h3 class="p-card__name">Premium Essential Tee</h3>
-            <p class="p-card__desc">Básica Esencial: Algodón Peinado 24.1</p>
-          </div>
-          <div class="p-card__prices">
-            <div class="p-card__price"><p class="p-card__price-label">Mayorista</p><p class="p-card__price-value">$ 18.000</p></div>
-            <div class="p-card__price p-card__price--suggested"><p class="p-card__price-label">Sugerido</p><p class="p-card__price-value">$ 30.000</p></div>
-            <div class="p-card__price p-card__price--result"><p class="p-card__price-label">Resultado</p><p class="p-card__price-value">$ 12.000</p></div>
-          </div>
-        </div>
-
-        <div class="p-card reveal reveal-d2">
-          <div class="p-card__img"><img src="assets/img/essential_musculle_tee.jpg" alt="Essential Muscle Tee"></div>
-          <div class="p-card__body">
-            <h3 class="p-card__name">Essential Muscle Tee</h3>
-            <p class="p-card__desc">Básica Esencial sin mangas: Algodón Peinado 24.1</p>
-          </div>
-          <div class="p-card__prices">
-            <div class="p-card__price"><p class="p-card__price-label">Mayorista</p><p class="p-card__price-value">$ 16.000</p></div>
-            <div class="p-card__price p-card__price--suggested"><p class="p-card__price-label">Sugerido</p><p class="p-card__price-value">$ 26.000</p></div>
-            <div class="p-card__price p-card__price--result"><p class="p-card__price-label">Resultado</p><p class="p-card__price-value">$ 10.000</p></div>
-          </div>
-        </div>
-
-        <div class="p-card reveal reveal-d3">
-          <div class="p-card__img"><img src="assets/img/essential_tank_top.jpg" alt="Essential Tank Top"></div>
-          <div class="p-card__body">
-            <h3 class="p-card__name">Essential Tank Top</h3>
-            <p class="p-card__desc">Musculosa Esencial: Algodón Peinado 24.1</p>
-          </div>
-          <div class="p-card__prices">
-            <div class="p-card__price"><p class="p-card__price-label">Mayorista</p><p class="p-card__price-value">$ 16.000</p></div>
-            <div class="p-card__price p-card__price--suggested"><p class="p-card__price-label">Sugerido</p><p class="p-card__price-value">$ 26.000</p></div>
-            <div class="p-card__price p-card__price--result"><p class="p-card__price-label">Resultado</p><p class="p-card__price-value">$ 10.000</p></div>
-          </div>
-        </div>
-
-        <div class="p-card reveal reveal-d4">
-          <div class="p-card__img"><img src="assets/img/premium_heavy_hoodie.jpg" alt="Premium Heavy Hoodie"></div>
-          <div class="p-card__body">
-            <h3 class="p-card__name">Premium Heavy Hoodie</h3>
-            <p class="p-card__desc">Buzo capucha: Frisa pesada calce regular construcción sólida</p>
-          </div>
-          <div class="p-card__prices">
-            <div class="p-card__price"><p class="p-card__price-label">Mayorista</p><p class="p-card__price-value">$ 33.000</p></div>
-            <div class="p-card__price p-card__price--suggested"><p class="p-card__price-label">Sugerido</p><p class="p-card__price-value">$ 48.000</p></div>
-            <div class="p-card__price p-card__price--result"><p class="p-card__price-label">Resultado</p><p class="p-card__price-value">$ 15.000</p></div>
-          </div>
-        </div>
-
-        <div class="p-card reveal reveal-d5">
-          <div class="p-card__img"><img src="assets/img/essential_relax_bermuda.jpg" alt="Essential Relax Bermuda"></div>
-          <div class="p-card__body">
-            <h3 class="p-card__name">Essential Relax Bermuda</h3>
-            <p class="p-card__desc">Bermuda esencial en frisa de algodón rústico de media estación, con textura natural</p>
-          </div>
-          <div class="p-card__prices">
-            <div class="p-card__price"><p class="p-card__price-label">Mayorista</p><p class="p-card__price-value">$ 21.000</p></div>
-            <div class="p-card__price p-card__price--suggested"><p class="p-card__price-label">Sugerido</p><p class="p-card__price-value">$ 35.000</p></div>
-            <div class="p-card__price p-card__price--result"><p class="p-card__price-label">Resultado</p><p class="p-card__price-value">$ 14.000</p></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CONDITIONS -->
-  <section class="conditions section">
-    <div class="section__inner">
-      <div class="conditions__header reveal">
-        <div class="s-label">Operativa</div>
-        <h2 class="s-title">Condiciones <em>comerciales y operativas</em></h2>
-        <p class="s-desc" style="margin-top:4px;">Trabajamos con flexibilidad total para que tu punto de venta crezca sin presiones.</p>
-      </div>
-      <ul class="conditions__list">
-        <li class="conditions__item reveal reveal-d1"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>No trabajamos con mínimos de compra.</strong> La selección de prendas se define en conjunto según el perfil del local y la rotación observada.</p></li>
-        <li class="conditions__item reveal reveal-d2"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Los diseños y talles están sujetos a disponibilidad de stock.</strong> Black Root trabaja con series limitadas y reposiciones dinámicas, lo que permite mantener la propuesta siempre fresca y con identidad.</p></li>
-        <li class="conditions__item reveal reveal-d3"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>La reposición se realiza en función de lo que mejor rota,</strong> priorizando siempre el rendimiento del punto de venta.</p></li>
-        <li class="conditions__item reveal reveal-d4"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Flexibilidad total</strong> para ajustar la selección en cualquier momento según la experiencia comercial.</p></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CLOSING -->
-  <section class="closing section">
-    <div class="section__inner">
-      <div class="reveal">
-        <img src="assets/img/logo.png" alt="Black Root" class="closing__logo">
-        <h2 class="closing__brand">Black Root</h2>
-        <p class="closing__tagline">Lo esencial, perfeccionado.</p>
-        <div class="closing__line"></div>
-        <p class="closing__contact">blackroot.com.ar</p>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    });
-  </script>
+    <footer class="gateway__footer">
+      <p>Lo esencial, perfeccionado. &copy; 2026</p>
+    </footer>
+  </main>
 
 </body>
 </html>
