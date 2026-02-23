@@ -129,6 +129,15 @@
     .p-card__price--result .p-card__price-value { color:var(--accent); font-weight:600; }
     .p-card__price--suggested .p-card__price-value { color:var(--cream); font-weight:400; }
 
+    /* ── MARGINS ── */
+    .margins { background:var(--black); padding:48px var(--pad); position:relative; }
+    .margins__grid { display:grid; grid-template-columns:1fr; gap:16px; margin-top:24px; }
+    .margins__card { background:rgba(212,180,106,0.05); border:1px solid rgba(212,180,106,0.15); padding:24px; text-align:center; transition:all 0.5s var(--ease); }
+    .margins__card:hover { background:rgba(212,180,106,0.08); border-color:var(--accent); }
+    .margins__type { display:block; font-family:var(--font-body); font-size:0.875rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--stone); margin-bottom:8px; }
+    .margins__value { display:block; font-family:var(--font-serif); font-size:2.2rem; color:var(--accent); font-weight:500; line-height:1; margin-bottom:4px; }
+    .margins__note { font-family:var(--font-body); font-size:0.95rem; color:var(--sand); }
+
     /* ── CONDITIONS ── */
     .conditions { background:var(--graphite); padding:36px var(--pad); }
     .conditions__header { margin-bottom:20px; }
@@ -144,7 +153,6 @@
     .closing { background:var(--black); padding:48px var(--pad); text-align:center; position:relative; }
     .closing::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:1px; height:24px; background:linear-gradient(to bottom,var(--accent),transparent); opacity:0.25; }
     .closing__logo { width:100px; height:auto; opacity:0.7; margin:0 auto 10px; display:block; }
-    .closing__brand { font-family:var(--font-display); font-size:2rem; font-weight:normal; letter-spacing:0.06em; color:var(--ivory); margin-bottom:4px; }
     .closing__tagline { font-family:var(--font-serif); font-size:1.2rem; font-weight:400; font-style:italic; color:var(--sand); margin-bottom:14px; }
     .closing__line { width:28px; height:1px; background:var(--accent); opacity:0.5; margin:0 auto 10px; }
     .closing__contact { font-family:var(--font-body); font-size:1.05rem; font-weight:400; letter-spacing:0.1em; color:var(--stone); }
@@ -221,6 +229,9 @@
       .connection__arrow--down { display:none; }
       .connection__arrow--right { display:inline; padding:0 4px; }
 
+      /* Margins: 2 columns */
+      .margins__grid { grid-template-columns:1fr 1fr; gap:24px; max-width:800px; margin:32px auto 0; }
+
       /* Products: horizontal cards */
       .products { padding:40px var(--pad); }
       .products__sub { font-size:1.25rem; }
@@ -246,7 +257,6 @@
       /* Closing */
       .closing { padding:40px var(--pad); }
       .closing__logo { width:140px; margin-bottom:12px; }
-      .closing__brand { font-size:clamp(2rem,3vw,2.8rem); }
       .closing__tagline { font-size:1.4rem; margin-bottom:16px; }
       .closing__contact { font-size:1.15rem; letter-spacing:0.12em; }
     }
@@ -298,7 +308,7 @@
       <ul class="profile__list">
         <li class="profile__item reveal reveal-d1"><span class="profile__num">01</span><span>Autorización para desarrollar la marca en zona exclusiva</span></li>
         <li class="profile__item reveal reveal-d2"><span class="profile__num">02</span><span>Estructura optimizada para venta mayorista y minorista</span></li>
-        <li class="profile__item reveal reveal-d3"><span class="profile__num">03</span><span>Márgenes estimados: Venta Directa (30-36%) | Mayorista (9-15%)</span></li>
+        <li class="profile__item reveal reveal-d3"><span class="profile__num">03</span><span>Soporte comercial y logístico continuo</span></li>
         <li class="profile__item reveal reveal-d4"><span class="profile__num">04</span><span>Posicionamiento prioritario sobre competidores locales</span></li>
       </ul>
     </div>
@@ -446,20 +456,42 @@
     </div>
   </section>
 
+  <!-- MARGENES -->
+  <section class="margins section">
+    <div class="section__inner">
+      <div class="reveal">
+        <div class="s-label s-label--center">Rentabilidad</div>
+        <h2 class="s-title" style="text-align:center;">Margen <em>Estimado</em></h2>
+        <div class="margins__grid">
+          <div class="margins__card">
+            <span class="margins__type">Venta Directa</span>
+            <span class="margins__value">30 – 36%</span>
+            <p class="margins__note">Al consumidor final (PVP)</p>
+          </div>
+          <div class="margins__card">
+            <span class="margins__type">Venta Mayorista</span>
+            <span class="margins__value">9 – 15%</span>
+            <p class="margins__note">Por unidad (con volumen)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONDITIONS -->
   <section class="conditions section">
     <div class="section__inner">
       <div class="conditions__header reveal">
-        <div class="s-label">Modelo Contractual</div>
-        <h2 class="s-title">Condiciones de <em>Exclusividad</em></h2>
-        <p class="s-desc" style="margin-top:4px;">Marco legal y comercial para el desarrollo de la marca en zona.</p>
+        <div class="s-label">Condiciones</div>
+        <h2 class="s-title">Marco <em>Operativo</em></h2>
+        <p class="s-desc" style="margin-top:4px;">Regulaciones para asegurar el crecimiento y la exclusividad de zona.</p>
       </div>
       <ul class="conditions__list">
-        <li class="conditions__item reveal reveal-d1"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Exclusividad Territorial:</strong> Designación oficial en zona específica. Prohibida la venta fuera de la misma sin autorización.</p></li>
-        <li class="conditions__item reveal reveal-d2"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Volumen Mínimo Trimestral:</strong> Requiere compra mínima de 200 remeras y 100 buzos para mantener la exclusividad automática.</p></li>
-        <li class="conditions__item reveal reveal-d3"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Política de Precios:</strong> Respeto obligatorio del PVP sugerido y precio mayorista sugerido. Sin descuentos no autorizados.</p></li>
+        <li class="conditions__item reveal reveal-d1"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Exclusividad:</strong> Sujeta al cumplimiento del volumen mínimo trimestral (200 remeras / 100 buzos).</p></li>
+        <li class="conditions__item reveal reveal-d2"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Política de Precios:</strong> Respeto obligatorio del PVP sugerido. No se permiten descuentos sin autorización previa.</p></li>
+        <li class="conditions__item reveal reveal-d3"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Territorio:</strong> Prohibida la venta fuera de la zona asignada sin autorización expresa de la marca.</p></li>
         <li class="conditions__item reveal reveal-d4"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Imagen de Marca:</strong> Uso exclusivo de material oficial. Prohibido alterar identidad visual, diseños o packaging.</p></li>
-        <li class="conditions__item reveal reveal-d5"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Duración del Contrato:</strong> Plazo inicial de 6 meses, renovable según desempeño y cumplimiento de objetivos.</p></li>
+        <li class="conditions__item reveal reveal-d5"><div class="conditions__icon"><div class="conditions__icon-dot"></div></div><p class="conditions__text"><strong>Modelo Contractual:</strong> Contrato inicial de 6 meses, renovable según desempeño y objetivos alcanzados.</p></li>
       </ul>
     </div>
   </section>
@@ -469,7 +501,6 @@
     <div class="section__inner">
       <div class="reveal">
         <img src="assets/img/logo.png" alt="Black Root" class="closing__logo">
-        <h2 class="closing__brand">Black Root</h2>
         <p class="closing__tagline">Lo esencial, perfeccionado.</p>
         <div class="closing__line"></div>
         <p class="closing__contact">blackroot.com.ar</p>
