@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     @font-face {
       font-family: 'Rushford Printed';
@@ -70,6 +71,46 @@
     @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 
+    /* WhatsApp Floating Button */
+    .whatsapp-btn {
+      position:fixed;
+      bottom:30px;
+      right:30px;
+      width:60px;
+      height:60px;
+      background:linear-gradient(135deg, var(--accent), #c9a95e);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      box-shadow:0 4px 20px rgba(212,180,106,0.3), 0 0 30px rgba(212,180,106,0.1);
+      z-index:999;
+      transition:all 0.3s var(--ease);
+      border:2px solid rgba(255,255,255,0.1);
+    }
+    .whatsapp-btn:hover {
+      transform:scale(1.1) translateY(-5px);
+      box-shadow:0 8px 30px rgba(212,180,106,0.5), 0 0 40px rgba(212,180,106,0.2);
+      background:linear-gradient(135deg, #e0c56f, #d4b46a);
+    }
+    .whatsapp-btn i {
+      font-size:32px;
+      color:var(--black);
+    }
+
+    @media (max-width:768px) {
+      .whatsapp-btn {
+        width:56px;
+        height:56px;
+        bottom:20px;
+        right:20px;
+      }
+      .whatsapp-btn i {
+        font-size:28px;
+      }
+    }
+
     @media (min-width:768px) {
       .gateway__options { grid-template-columns:1fr 1fr; gap:50px; max-width:1100px; }
       .gateway__logo { max-width:540px; margin-bottom:24px; }
@@ -113,6 +154,11 @@
       <p>Lo esencial, perfeccionado. &copy; 2026</p>
     </footer>
   </main>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/542494209391" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" title="Contactanos por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
 </body>
 </html>
